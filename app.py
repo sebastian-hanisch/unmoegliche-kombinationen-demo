@@ -108,9 +108,9 @@ with st.sidebar:
     st.header("📈 Experimente 2 und 3: Kurven und ICE")
     klasse = st.radio("Modellklasse", C.KLASSEN, key="klasse_radio", help="Boosting, Random Forest, Netz (16 Einheiten) und lineares Modell, eingefroren.")
     n = st.radio("Trainingsgröße n", C.N_OPTIONEN, key="n_radio", horizontal=True, help="Zahl der Trainingszeilen je Zufalls-Seed.")
-    st.header("🧪 Experimente 4 und 5: Dosis und Fächer")
+    st.header("🧪 Experimente 4 und 5: Dosis und Intervallzahl")
     dk = st.radio("Klasse", C.DOSIS_KLASSEN, key="dk_radio", horizontal=True, help="Boosting oder Netz (n = 1 000).")
-    k = st.radio("Zahl der Fächer K der ALE", C.K_OPTIONEN, key="k_radio", horizontal=True, help="Angeforderte Zahl der Quantilfächer des Vorlaufs; bei 45 % Nullen bleiben weniger (bei K = 20 elf bis zwölf Fächer).")
+    k = st.radio("Zahl der Intervalle K der ALE", C.K_OPTIONEN, key="k_radio", horizontal=True, help="Angeforderte Zahl der Quantilintervalle des Vorlaufs; bei 45 % Nullen bleiben weniger (bei K = 20 elf bis zwölf Intervalle).")
 
 sync_query_params({"wert_select": wert, "p0_slider": float(p0), "klasse_radio": klasse, "n_radio": int(n), "dk_radio": dk, "k_radio": int(k)})
 
@@ -190,8 +190,8 @@ st.caption(TX.EXP5_CAPTION)
 r5 = _exp5(dk, int(k))
 a, b, c = st.columns(3)
 a.metric("unmögliche Auswertungspunkte", ev.spanne(100 * r5["inv"][0], 100 * r5["inv"][1], 1) + " %")
-b.metric("Effekt im ersten Fach (Modell)", ev.spanne(*r5["eff0_m"], 2))
-c.metric("erstes Fach reicht bis Vorlauf", ev.spanne(*r5["hi0"], 2))
+b.metric("Effekt im ersten Intervall (Modell)", ev.spanne(*r5["eff0_m"], 2))
+c.metric("erstes Intervall reicht bis Vorlauf", ev.spanne(*r5["hi0"], 2))
 kind, text = ev.verdict_faecher(r5)
 getattr(st, kind)(text)
 st.caption(TX.NEGATIV_5)
@@ -217,7 +217,7 @@ with st.expander("📐 Mathematische Formulierung"):
 | $v$, $z$, $z_0$ | Vorlauf, Gitterwert, erster Gitterwert (Anfang der Kurve) |
 | $\mathrm{real}(z)$ | realer Effekt: Mittel von $\mu$ über die Zeilen, in denen der Vorlauf vorkommt (Export und Umschlag), bei Vorlauf $z$ |
 | $p_0$ | Anteil der Container ohne Vorlauf (Import und Leer) |
-| $K$ | Zahl der Fächer der ALE |
+| $K$ | Zahl der Intervalle der ALE |
 
 [Schritt für Schritt erklärt, mit Herleitung und Literatur](https://sebastianhanisch.net/unmoegliche-kombinationen-erklaert.html#fachleute)
         """

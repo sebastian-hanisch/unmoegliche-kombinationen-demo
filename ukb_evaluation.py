@@ -48,7 +48,7 @@ def verdict_kurven(r: dict, wahr: dict) -> tuple[str, str]:
             f"Gegen die eigene Wahrheit liegt die ALE {spanne(*r['verh_own'], 1)}-mal näher als die PD, gegen den realen Effekt {spanne(*r['verh_real'], 1)}-mal; die ALE ist gegen die eigene Wahrheit "
             f"in {spanne(100 * r['naeher_own'][0], 100 * r['naeher_own'][1], 0)} % der Zufalls-Seeds näher, gegen den realen Effekt in {spanne(100 * r['naeher_real'][0], 100 * r['naeher_real'][1], 0)} %.")
     if r["klasse"] == "lineares Modell":
-        return "warning", text + " Beim linearen Modell sind PD, ALE und die PD über die Stütze gleich: ein additives Modell kann nicht zwischen möglichen und unmöglichen Zeilen unterscheiden."
+        return "warning", text + " Beim linearen Modell sind PD, ALE und die PD über den Träger gleich: ein additives Modell kann nicht zwischen möglichen und unmöglichen Zeilen unterscheiden."
     return "info", text
 
 
@@ -64,7 +64,7 @@ def verdict_ice(r: dict) -> tuple[str, str]:
 def verdict_linear_live(r: dict) -> tuple[str, str]:
     """Das lineare Modell live: alle ICE-Kurven haben denselben Anstieg."""
     return "info", (f"Lineares Modell, live auf {r['n']} Zeilen gerechnet: Anstieg von Vorlauf 2 auf 5 für alle 3 000 Auswertungszeilen zwischen {de(r['sl_min'], 3)} und {de(r['sl_max'], 3)} "
-                    f"(je Tag {de(r['je_tag'], 3)} in ln-Einheiten, also ein fester Prozentzuschlag auf die Verweilzeit); PD {de(r['pd'], 3)}, ALE {de(r['ale'], 3)}, PD über die Stütze {de(r['pd_stuetze'], 3)} (ein Zufalls-Seed; die Gruppenmittel des Experiments 2 liegen bei 0,64 bis 0,65).")
+                    f"(je Tag {de(r['je_tag'], 3)} in ln-Einheiten, also ein fester Prozentzuschlag auf die Verweilzeit); PD {de(r['pd'], 3)}, ALE {de(r['ale'], 3)}, PD über den Träger {de(r['pd_stuetze'], 3)} (ein Zufalls-Seed; die Gruppenmittel des Experiments 2 liegen bei 0,64 bis 0,65).")
 
 
 # ------------------------------------------------------------------------------------------------------- Experiment 4
@@ -82,8 +82,8 @@ def verdict_dosis(r: dict) -> tuple[str, str]:
 
 # ------------------------------------------------------------------------------------------------------- Experiment 5
 def verdict_faecher(r: dict) -> tuple[str, str]:
-    """ALE ist nicht gratis: Zahl der Fächer K."""
-    text = (f"{r['klasse']}, K = {r['K']} (angefordert; bei 45 % Zeilen ohne Vorlauf bleiben weniger Fächer): {spanne(100 * r['inv'][0], 100 * r['inv'][1], 1)} % der Auswertungspunkte der ALE sind unmögliche Kombinationen; im ersten Fach beträgt der Effekt "
-            f"{spanne(*r['eff0_m'], 2)} statt {spanne(*r['eff0_t'], 2)} bei der wahren Funktion; das erste Fach reicht bis Vorlauf {spanne(*r['hi0'], 2)}; "
+    """ALE ist nicht gratis: Zahl der Intervalle K."""
+    text = (f"{r['klasse']}, K = {r['K']} (angefordert; bei 45 % Zeilen ohne Vorlauf bleiben weniger Intervalle): {spanne(100 * r['inv'][0], 100 * r['inv'][1], 1)} % der Auswertungspunkte der ALE sind unmögliche Kombinationen; im ersten Intervall beträgt der Effekt "
+            f"{spanne(*r['eff0_m'], 2)} statt {spanne(*r['eff0_t'], 2)} bei der wahren Funktion; das erste Intervall reicht bis Vorlauf {spanne(*r['hi0'], 2)}; "
             f"Abweichung der ALE gegen den realen Effekt {spanne(*r['eA_real'], 2)} (n = 1000, fünf Gruppen zu je 4 Zufalls-Seeds).")
     return ("warning" if min(r["hi0"]) >= 2.0 else "info"), text

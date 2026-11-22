@@ -44,7 +44,7 @@ def test_kurven_verdikt_nennt_spannen_wahrheit_und_zaehlung():
 
 def test_kurven_verdikt_lineares_modell_ist_eine_warnung():
     kind, text = ev.verdict_kurven(_r2("lineares Modell"), WAHR)
-    assert kind == "warning" and "PD, ALE und die PD über die Stütze gleich" in text
+    assert kind == "warning" and "PD, ALE und die PD über den Träger gleich" in text
 
 
 def test_ice_verdikt():

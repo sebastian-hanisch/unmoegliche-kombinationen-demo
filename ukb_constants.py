@@ -33,7 +33,7 @@ PRESET_HELP = {
     "Standard (45 % ohne Vorlauf, Boosting, n = 3000)": "Der Generator mit 45 % Importen und Leercontainern (nie ein Vorlauf), Boosting, 3 000 Trainingszeilen.",
     "Alle Zeilen haben einen Vorlauf (Anteil 0)": "Kein Import und kein Leercontainer: die partielle Abhängigkeit liegt auf dem realen Effekt, und die ALE hat keinen Vorteil, der für beide Klassen gilt.",
     "Fast keine Zeilen mit Vorlauf (Anteil 0,9)": "Nur jede zehnte Zeile hat einen Vorlauf: die ALE ist beim Boosting in 4 von 5 Gruppen schlechter als die partielle Abhängigkeit, beim Netz in 4 von 5 besser.",
-    "Lineares Modell": "Ein additives Modell kann nicht zwischen möglichen und unmöglichen Zeilen unterscheiden: PD, ALE und die PD über die Stütze sind gleich.",
+    "Lineares Modell": "Ein additives Modell kann nicht zwischen möglichen und unmöglichen Zeilen unterscheiden: PD, ALE und die PD über den Träger sind gleich.",
     "Netz": "Das kleine Netz: ein erfundener Effekt auf unmöglichen Zeilen, aber ein Teil der unmöglichen Kurven ist flach (6 bis 30 % bei n = 3 000).",
-    "Zu grobe ALE (K = 5)": "Angefordert sind fünf Fächer (wegen der Nullen bleiben drei): das erste Fach reicht bis in den ausgewerteten Bereich und die ALE-Kurve des Boostings weicht deutlich ab.",
+    "Zu grobe ALE (K = 5)": "Angefordert sind fünf Intervalle (wegen der Nullen bleiben drei): das erste Intervall reicht bis in den ausgewerteten Bereich und die ALE-Kurve des Boostings weicht deutlich ab.",
 }
